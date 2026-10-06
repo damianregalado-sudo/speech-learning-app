@@ -23,8 +23,8 @@ export default function TracingCanvas({
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     ctx.strokeStyle = '#2196F3'
-    ctx.lineWidth = 2
-    ctx.setLineDash([5, 5])
+    ctx.lineWidth = 5
+    ctx.setLineDash([8, 8])
 
     if (referenceTrace && referenceTrace.length > 1) {
       ctx.beginPath()
@@ -54,8 +54,8 @@ export default function TracingCanvas({
     }
 
     ctx.strokeStyle = '#2196F3'
-    ctx.lineWidth = 2
-    ctx.setLineDash([5, 5])
+    ctx.lineWidth = 5
+    ctx.setLineDash([8, 8])
     if (referenceTrace && referenceTrace.length > 1) {
       ctx.beginPath()
       ctx.moveTo(referenceTrace[0][0], referenceTrace[0][1])
