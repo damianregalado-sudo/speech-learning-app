@@ -1,0 +1,179 @@
+.pronunciation-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.pronunciation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.pronunciation-header h2 {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+  color: var(--primary-color);
+  margin: 0;
+  font-size: 2rem;
+}
+
+.syllable-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 8px;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+
+.syllable-button {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 2px solid #DDD;
+  background: var(--white);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.syllable-button:hover:not(:disabled) {
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.syllable-button.active {
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  color: var(--white);
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.syllable-button.completed {
+  background-color: var(--success-color);
+  color: var(--white);
+  border-color: var(--success-color);
+}
+
+.pronunciation-content {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  flex: 1;
+}
+
+.articulation-box {
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.articulation-emoji {
+  font-size: 5rem;
+  margin-bottom: 15px;
+}
+
+.articulation-instructions {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+}
+
+.recording-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.record-button {
+  background: linear-gradient(135deg, #FF6B9D, #FF9800);
+  color: var(--white);
+  padding: 16px 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.record-button:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
+}
+
+.record-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.record-button.recording {
+  animation: recordPulse 1s infinite;
+}
+
+@keyframes recordPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.result-box {
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  border-left: 5px solid var(--warning-color);
+}
+
+.result-box.success {
+  border-left-color: var(--success-color);
+  background: #F1F8F6;
+}
+
+.result-score {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin: 15px 0;
+}
+
+.waveform-display {
+  width: 100%;
+  height: 80px;
+  background: #F5F5F5;
+  border-radius: 8px;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 1024px) {
+  .pronunciation-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .syllable-button {
+    font-size: 0.85rem;
+  }
+
+  .articulation-emoji {
+    font-size: 3.5rem;
+  }
+
+  .result-score {
+    font-size: 2rem;
+  }
+}

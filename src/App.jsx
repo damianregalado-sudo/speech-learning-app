@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import Home from './pages/Home'
 import ColoringPage from './pages/ColoringPage'
 import TracingPage from './pages/TracingPage'
+import PronunciationPage from './pages/PronunciationPage'
+import ReadingPage from './pages/ReadingPage'
+import DashboardPage from './pages/DashboardPage'
 import './styles/App.css'
 
 export default function App() {
@@ -41,6 +44,12 @@ export default function App() {
         <ColoringPage childProfile={childProfile} onBack={goHome} />
       ) : currentPage === 'tracing' ? (
         <TracingPage childProfile={childProfile} onBack={goHome} />
+      ) : currentPage === 'pronunciation' ? (
+        <PronunciationPage childProfile={childProfile} onBack={goHome} />
+      ) : currentPage === 'reading' ? (
+        <ReadingPage childProfile={childProfile} onBack={goHome} />
+      ) : currentPage === 'dashboard' ? (
+        <DashboardPage childProfile={childProfile} onBack={goHome} />
       ) : null}
     </div>
   )
