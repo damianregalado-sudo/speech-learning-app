@@ -10,7 +10,7 @@ const DRAWINGS = [
   { id: 6, name: 'Caramelo', emoji: '🍭', color: 'multicolor' },
 ]
 
-export default function Home({ onStart, childProfile }) {
+export default function Home({ onStart, onSelectActivity, childProfile }) {
   const [showForm, setShowForm] = useState(!childProfile)
   const [childName, setChildName] = useState(childProfile?.name || '')
   const [childAge, setChildAge] = useState(childProfile?.age || 4)
@@ -22,9 +22,17 @@ export default function Home({ onStart, childProfile }) {
         name: childName,
         age: childAge,
         createdAt: new Date().toISOString(),
-      })
+      }, 'home')
       setShowForm(false)
     }
+  }
+
+  const handleSelectActivity = (activity) => {
+    if (!childProfile) {
+      setShowForm(true)
+      return
+    }
+    onSelectActivity(activity)
   }
 
   return (
@@ -104,18 +112,45 @@ export default function Home({ onStart, childProfile }) {
         </div>
       )}
 
-      <div className="drawings-grid">
-        <h3>Elige un dibujo para colorear:</h3>
-        <div className="grid">
-          {DRAWINGS.map((drawing) => (
-            <div key={drawing.id} className="drawing-card">
-              <div className="drawing-emoji">{drawing.emoji}</div>
-              <p className="drawing-name">{drawing.name}</p>
-              <p className="drawing-color">({drawing.color})</p>
-            </div>
-          ))}
+      <div className="activities-section">
+        <h3>¿Qué quieres hacer?</h3>
+        <div className="activities-grid">
+          <button
+            onClick={() => handleSelectActivity('coloring')}
+            className="activity-card colorear"
+          >
+            <div className="activity-emoji">🎨</div>
+            <div className="activity-title">Colorear</div>
+            <div className="activity-description">Pinta los dibujos</div>
+            <div className="activity-difficulty">Nivel: Fácil</div>
+          </button>
+
+          <button
+            onClick={() => handleSelectActivity('tracing')}
+            className="activity-card tracing"
+          >
+            <div className="activity-emoji">✏️</div>
+            <div className="activity-title">Trazo de Letras</div>
+            <div className="activity-description">Aprende a escribir</div>
+            <div className="activity-difficulty">Nivel: Medio</div>
+          </button>
         </div>
       </div>
+
+      {childProfile && (
+        <div className="drawings-grid">
+          <h3>Dibujos para colorear:</h3>
+          <div className="grid">
+            {DRAWINGS.map((drawing) => (
+              <div key={drawing.id} className="drawing-card" onClick={() => handleSelectActivity('coloring')}>
+                <div className="drawing-emoji">{drawing.emoji}</div>
+                <p className="drawing-name">{drawing.name}</p>
+                <p className="drawing-color">({drawing.color})</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -23,6 +23,90 @@
   margin: 0;
 }
 
+.activities-section {
+  margin-bottom: 50px;
+  padding: 0 10px;
+}
+
+.activities-section h3 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.activity-card {
+  background: var(--white);
+  padding: 25px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  font-family: var(--font-main);
+}
+
+.activity-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-color);
+}
+
+.activity-card.colorear {
+  border-top: 5px solid #FF9800;
+}
+
+.activity-card.colorear:hover {
+  border-color: #FF9800;
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.05), rgba(255, 152, 0, 0.05));
+}
+
+.activity-card.tracing {
+  border-top: 5px solid #2196F3;
+}
+
+.activity-card.tracing:hover {
+  border-color: #2196F3;
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.05), rgba(33, 150, 243, 0.05));
+}
+
+.activity-emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.activity-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.activity-description {
+  font-size: 0.9rem;
+  color: #777;
+  font-weight: 500;
+}
+
+.activity-difficulty {
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: 5px;
+  padding-top: 8px;
+  border-top: 1px solid #EEE;
+}
+
 .form-container {
   display: flex;
   justify-content: center;
