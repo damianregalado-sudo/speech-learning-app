@@ -36,6 +36,8 @@ const COLORING_DATA = {
   },
 }
 
+const TOTAL_DRAWINGS = Object.keys(COLORING_DATA).length
+
 export default function ColoringPage({ childProfile, onBack }) {
   const [selectedDrawing, setSelectedDrawing] = useState(1)
   const [selectedColor, setSelectedColor] = useState('#FF9800')
@@ -83,6 +85,16 @@ export default function ColoringPage({ childProfile, onBack }) {
     }
   }
 
+  const handleNextDrawing = () => {
+    if (selectedDrawing < TOTAL_DRAWINGS) {
+      setSelectedDrawing(selectedDrawing + 1)
+      setFilledAreas(new Set())
+      setSessionData({ startTime: Date.now(), accuracy: 0 })
+    } else {
+      onBack()
+    }
+  }
+
   return (
     <div className="coloring-page">
       <div className="coloring-header">
@@ -119,6 +131,9 @@ export default function ColoringPage({ childProfile, onBack }) {
           {sessionData.accuracy >= 80 && (
             <div className="completion-message">
               <p>¡Excelente trabajo! 🎉</p>
+              <button onClick={handleNextDrawing} className="btn-next">
+                {selectedDrawing < TOTAL_DRAWINGS ? 'Siguiente dibujo →' : 'Terminar ✓'}
+              </button>
             </div>
           )}
         </div>

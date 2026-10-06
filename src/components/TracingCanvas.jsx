@@ -87,9 +87,18 @@ export default function TracingCanvas({
     const scaleX = canvas.width / rect.width
     const scaleY = canvas.height / rect.height
 
+    let clientX, clientY
+    if (e.touches) {
+      clientX = e.touches[0].clientX
+      clientY = e.touches[0].clientY
+    } else {
+      clientX = e.clientX
+      clientY = e.clientY
+    }
+
     return [
-      (e.clientX - rect.left) * scaleX,
-      (e.clientY - rect.top) * scaleY
+      (clientX - rect.left) * scaleX,
+      (clientY - rect.top) * scaleY
     ]
   }
 
@@ -113,6 +122,28 @@ export default function TracingCanvas({
     setIsDrawing(false)
   }
 
+  const handleTouchStart = (e) => {
+    if (disabled) return
+    e.preventDefault()
+    setIsDrawing(true)
+    const coords = getCanvasCoordinates(e)
+    setTrace([coords])
+  }
+
+  const handleTouchMove = (e) => {
+    if (!isDrawing || disabled) return
+    e.preventDefault()
+    const coords = getCanvasCoordinates(e)
+    setTrace([...trace, coords])
+  }
+
+  const handleTouchEnd = (e) => {
+    if (isDrawing && trace.length > 10) {
+      onTraceComplete(trace)
+    }
+    setIsDrawing(false)
+  }
+
   const handleClear = () => {
     setTrace([])
   }
@@ -126,7 +157,10 @@ export default function TracingCanvas({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
-        style={{ cursor: disabled ? 'default' : 'crosshair' }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{ cursor: disabled ? 'default' : 'crosshair', touchAction: 'none' }}
       />
       {!disabled && (
         <div className="canvas-controls">
